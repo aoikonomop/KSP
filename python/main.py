@@ -8,6 +8,7 @@ from download_utils import download_single_entry, unzip_entries
 def main():
     #Set Parameters
     data_dir = "C:\\Users\\antonios.o\\Documents\\Test_projects\\MOT-MTP\Data\\"
+    predator_git_path = "C:\\Users\\antonios.o\\Documents\\GitHub\\hudl_predator\\predator\\"
     tracab_id = "56f0146f1c374d31a4109265"
 
     xmin, xmax = -55, 55  # x range in Tracab coordinate system
@@ -51,7 +52,7 @@ def main():
 
     video_file_name = '{}-pana.mp4'.format(game_id)
 
-    event_telemetry = get_event_telemetry(game_root, game_id)
+    event_telemetry = get_event_telemetry(game_root, game_id, predator_git_path)
     telemetry_map = get_telemetry_map(event_telemetry)
 
     #Load metadata

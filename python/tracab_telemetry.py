@@ -68,9 +68,9 @@ def get_telemetry_map(event_telemetry):
     return telemetry_map
 
 
-def get_event_telemetry(game_root, game_id):
+def get_event_telemetry(game_root, game_id, predator_git_path):
 
-    sys.path.append(PREDATOR_GIT_PATH)
+    sys.path.append(predator_git_path)
     from hudl_predator.data_import.processing.event_telemetry import EventTelemetry
     telemetry_file = os.path.join(game_root, 'full_event_{}.hdf5'.format(game_id))
     event_telemetry = EventTelemetry.from_hdf5(telemetry_file)
