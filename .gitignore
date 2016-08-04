@@ -4,6 +4,15 @@
 # CLion project folder
 *.idea
 
+# Ipython folder
+*ipython
+
+# python pyc files
+*.pyc
+
+#Data folder
+*Data
+
 # Visual Studio Code project folder
 *.vscode
 
