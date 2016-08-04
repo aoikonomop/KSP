@@ -1,0 +1,76 @@
+
+######################################################################
+
+2012 Aug 22 14:26:53 (from mtp.cc)
+
+
+  exit(0);
+
+  if(argc < 2) {
+    cerr << argv[0] << " <graph file>" << endl;
+    exit(EXIT_FAILURE);
+  }
+
+  ifstream *file = new ifstream(argv[1]);
+
+  int nb_edges, nb_vertices;
+  int source, sink;
+
+  if(file->good()) {
+
+    (*file) >> nb_vertices >> nb_edges;
+    (*file) >> source >> sink;
+
+    scalar_t *edge_lengths = new scalar_t[nb_edges];
+    int *vertex_from = new int[nb_edges];
+    int *vertex_to = new int[nb_edges];
+    int *result_edge_occupation = new int[nb_edges];
+
+    for(int e = 0; e < nb_edges; e++) {
+      (*file) >> vertex_from[e] >> vertex_to[e] >> edge_lengths[e];
+    }
+
+    find_best_paths(nb_vertices, nb_edges,
+                    vertex_from, vertex_to, edge_lengths,
+                    source, sink,
+                    result_edge_occupation);
+
+    // dot_print(nb_vertices, nb_edges,
+    // vertex_from, vertex_to, edge_lengths,
+    // source, sink,
+    // result_edge_occupation);
+
+    delete[] result_edge_occupation;
+    delete[] edge_lengths;
+    delete[] vertex_from;
+    delete[] vertex_to;
+
+  } else {
+
+    cerr << "Can not open " << argv[1] << endl;
+
+    delete file;
+    exit(EXIT_FAILURE);
+
+  }
+
+  delete file;
+
+######################################################################
+
+2012 Dec 29 00:09:41 (from mtp_example.cc)
+
+  { // ******************************* START ***************************
+#warning Test code added on 2012 Dec 29 00:07:21
+    int nb_vertices = 100;
+    int *vertex_from = new int[nb_vertices];
+    int *vertex_to = new int[nb_vertices];
+    for(int k = 0; k < nb_vertices; k++) {
+      vertex_from[k] = k;
+      vertex_to[k] = (k + 1)%nb_vertices;
+    }
+    MTPGraph mg(nb_vertices, nb_vertices, vertex_from, vertex_to, 0, nb_vertices/2);
+    delete[] vertex_from;
+    delete[] vertex_to;
+  } // ******************************** END ****************************
+
